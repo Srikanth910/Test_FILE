@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import DataTable from "./DataTable";
 import CloseIcon from "@material-ui/icons/Close";
+import { headCells, rows } from "../pages/data";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -33,13 +34,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ModalForm({ handleClose, open }) {
+export default function ModalForm({ handleClose, open, formdata }) {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(false);
+  const [tablerows, setrows] = React.useState(rows);
 
+  const onSearch = (data, text) =>{
+    let temp=
+    Object.values(data).filter((person) => {
+      // debugger;
+      const savageMatch =
+JSON.stringify(person).toLowerCase().indexOf(text.toLowerCase()) !== -1;
+
+      if (savageMatch) return savageMatch;
+    });
+     return temp
+  }
   const handleChange = (event) => {
     setChecked(event.target.checked);
+    if (event.target.value) {
+       console.log(onSearch(rows, event.target.value))
+      setrows(onSearch(rows, event.target.value));
+    }
   };
+
+  React.useEffect(() => {
+    if (formdata) {
+      let data = rows.filter((item) => item.member_id === formdata.MemberID);
+      setrows(data);
+    }
+  }, [formdata]);
 
   return (
     <div>
@@ -81,12 +105,17 @@ export default function ModalForm({ handleClose, open }) {
                   xs
                   direction="row"
                   justifyContent="space-between"
+                  spacing={3}
                 >
                   <Grid item>
-                    <Typography variant="h6">show</Typography>
+                    <Typography variant="h6">Search :</Typography>
                   </Grid>
                   <Grid item xs>
-                    <TextField />
+                    <TextField
+                      variant="outlined"
+                      size="small"
+                      onChange={handleChange}
+                    />
                     {/* </Grid> */}
                   </Grid>
                 </Grid>
@@ -94,13 +123,12 @@ export default function ModalForm({ handleClose, open }) {
 
               <Grid item>
                 {/* <div className={classes.grid}> */}
-                  <DataTable />
+                <DataTable headCells={headCells} rows={tablerows} />
                 {/* </div> */}
               </Grid>
             </Grid>
           </Paper>
 
-         
           <Box py={5}>
             <DialogActions>
               <Button color="primary" variant="contained">
@@ -109,7 +137,8 @@ export default function ModalForm({ handleClose, open }) {
               <Button color="primary" variant="contained">
                 Cancel
               </Button>
-            </DialogActions>``
+            </DialogActions>
+            ``
           </Box>
         </DialogContent>
       </Dialog>

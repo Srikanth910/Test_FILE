@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -54,14 +54,23 @@ const useStyles = makeStyles((theme) => ({
 export default function MedicalForm() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [formdata, setformdata] = useState({});
   const handleClickOpen = () => {};
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+   
     setOpen(true);
   };
+  const handlechange = (e, data) => {
+    setformdata({
+      ...formdata,
+      [data.name]: e.target.value,
+    });
+  };
+  // console.log(open)
   return (
     <div className={classes.root}>
       <Grid container>
@@ -85,13 +94,18 @@ export default function MedicalForm() {
             <Toolbar className={classes.toolbarItem2}>
               <form
                 className={classes.gridContainer}
-                autoComplete="off"
+                // autoComplete="off"
                 onSubmit={handleSubmit}
               >
                 <Grid container spacing={5}>
                   {inputFormElements.slice(0, 4).map((input) => (
                     <Grid xs={input.xs} sm={input.sm} item>
-                      <TextField {...input} size="small" required />
+                      <TextField
+                        {...input}
+                        size="small"
+                        required
+                        onChange={(e) => handlechange(e, input)}
+                      />
                     </Grid>
                   ))}
                 </Grid>
@@ -106,7 +120,11 @@ export default function MedicalForm() {
                     >
                       Clear
                     </Button>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSubmit}
+                    >
                       Search
                     </Button>
                   </Grid>
@@ -116,7 +134,7 @@ export default function MedicalForm() {
           </form>
         </Grid>
       </Grid>
-      <ModalForm open={open} handleClose={handleClose} />
+      <ModalForm open={open} handleClose={handleClose} formdata={formdata} />
     </div>
   );
 }

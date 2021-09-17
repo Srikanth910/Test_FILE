@@ -13,7 +13,7 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import { headCells, rows } from "../pages/data";
+// import { headCells, rows } from "../pages/data";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -50,6 +50,8 @@ function EnhancedTableHead(props) {
     numSelected,
     rowCount,
     onRequestSort,
+    headCell,
+    rows
   } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -59,7 +61,7 @@ function EnhancedTableHead(props) {
     <TableHead className={classes.thead}>
       <TableRow>
         <TableCell padding="checkbox"></TableCell>
-        {headCells.map((headCell) => (
+        {headCell?.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
@@ -88,12 +90,12 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
+  // numSelected: PropTypes.number.isRequired,
+  // onRequestSort: PropTypes.func.isRequired,
+  // onSelectAllClick: PropTypes.func.isRequired,
+  // order: PropTypes.oneOf(["asc", "desc"]).isRequired,
+  // orderBy: PropTypes.string.isRequired,
+  // rowCount: PropTypes.number.isRequired,
 };
 
 const useToolbarStyles = makeStyles((theme) => ({
@@ -166,7 +168,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+
+export default function Datatable({rows, headCell}) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -228,6 +231,7 @@ export default function EnhancedTable() {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+
   return (
     <div>
       {/* <div className={classes.root}> */}
@@ -247,6 +251,8 @@ export default function EnhancedTable() {
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
                 rowCount={rows.length}
+                rows={rows}
+                headCell={headCell}
               />
               <TableBody>
                 {stableSort(rows, getComparator(order, orderBy))
