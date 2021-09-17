@@ -61,7 +61,6 @@ export default function MedicalForm() {
   };
 
   const handleSubmit = (e) => {
-   
     setOpen(true);
   };
   const handlechange = (e, data) => {
@@ -97,15 +96,49 @@ export default function MedicalForm() {
                 // autoComplete="off"
                 onSubmit={handleSubmit}
               >
-                <Grid container spacing={5}>
+                {/* <Grid container xs="12">
+                 
+                 
+                    <Grid container direction="column" >
+
+                      <Grid item>
+<Typography variant="subtitle1">
+  {input.label}
+</Typography>
+                      </Grid>
+
+                   <Grid  item>
+                       <TextField
+                         {...input}
+                         size="small"
+                         required
+                         onChange={(e) => handlechange(e, input)}
+                       />
+                     </Grid>
+                    </Grid>
+                    
+                  ))}
+                </Grid> */}
+
+                <Grid container direction="row" xs={"12"} spacing={8}>
                   {inputFormElements.slice(0, 4).map((input) => (
-                    <Grid xs={input.xs} sm={input.sm} item>
-                      <TextField
-                        {...input}
-                        size="small"
-                        required
-                        onChange={(e) => handlechange(e, input)}
-                      />
+                    <Grid item xs={"6"}>
+                      <Grid container direction="column">
+                        <Grid item>
+                          <Typography variant="subtitle2" style={{fontWeight:"600"}}>
+                            {input.textlabel}
+                          </Typography>
+                        </Grid>
+
+                        <Grid item>
+                          <TextField
+                            {...input}
+                            size="small"
+                            required
+                            onChange={(e) => handlechange(e, input)}
+                          />
+                        </Grid>
+                      </Grid>
                     </Grid>
                   ))}
                 </Grid>

@@ -1,18 +1,18 @@
 export const inputFormElements=[
     {
-        name:"firstName",label:"Member First Name:", 
+        name:"firstName",textlabel:"Member First Name :", 
         variant:"outlined", fullWidth:true,required:true, xs:12,sm:6
     },
     {
-        name:"lastName",label:"Member Last Name:", 
+        name:"lastName",textlabel:"Member Last Name :", 
         variant:"outlined", fullWidth:true,required:true, xs:12,sm:6
     },
     {
-        name:"DateofBirth", type:"date",label:"", 
+        name:"DateofBirth", type:"date",textlabel:"Date Of Birth :", 
         variant:"outlined", fullWidth:true,required:true, xs:12,sm:6
     },
     {
-        name:"MemberID",type:"number", label:"Member ID", 
+        name:"MemberID",type:"number", textlabel:"Member ID :", 
         variant:"outlined", fullWidth:true,required:true, xs:12,sm:6
     },
     
@@ -30,4 +30,135 @@ export const inputloginElements=[
     },
    
     
+]
+
+export const MedicalFormElements=[
+    {
+        name:"firstName",textlabel:"Member First Name:", 
+        variant:"outlined", fullWidth:true,required:true,
+    },
+    {
+        name:"lastName",textlabel:"Member Last Name:", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"DateofBirth", type:"date",textlabel:" DateofBirth", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"MemberID",type:"number", textlabel:"Member ID", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"firstName",textlabel:"Member First Name:", 
+        variant:"outlined", fullWidth:true,required:true,
+    },
+    {
+        name:"lastName",textlabel:"Member Last Name:", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"DateofBirth", type:"date",textlabel:" DateofBirth", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"MemberID",type:"number", textlabel:"Member ID", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"firstName",textlabel:"Member First Name:", 
+        variant:"outlined", fullWidth:true,required:true,
+    },
+    {
+        name:"lastName",textlabel:"Member Last Name:", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"DateofBirth", type:"date",textlabel:" DateofBirth", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"MemberID",type:"number", textlabel:"Member ID", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"MemberID",type:"number", textlabel:"Member ID", 
+        variant:"outlined", fullWidth:true,required:true,
+         type:'dropdown', 
+         sublist:[{}]
+    }
+    
+];
+
+export const MedicalFormElements2=[
+    {
+        name:"firstName",label:"Member First Name:", 
+        variant:"outlined", fullWidth:true,required:true,
+    },
+    {
+        name:"lastName",label:"Member Last Name:", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"DateofBirth", type:"date",label:"", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    
+];
+
+export const MedicalFormElements3=[
+    {
+        name:"firstName",label:"Member First Name:", 
+        variant:"outlined", fullWidth:true,required:true,
+    },
+    {
+        name:"lastName",label:"Member Last Name:", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"DateofBirth", type:"date",label:"", 
+        variant:"outlined", fullWidth:true,required:true
+    },
+    {
+        name:"DateofBirth", type:"date",label:"", 
+        variant:"outlined", fullWidth:true,required:true
+    }
+    
+];
+export const MenuItems=[
+    {
+    name:'Action Center',
+    code:1,
+},
+{
+    name:' Case management Correspondence',
+    code:1,
+},
+
+{
+    name:' Case management Roster',
+    code:1,
+},
+{
+    name:'Claims',
+    code:1,
+},
+{
+    name:'Medical/Behavioral Health',
+    code:1,
+},
+
+{
+    name:'Appeals',
+    code:1,
+},
+{
+    name:'Correspondenceh',
+    code:1,
+},
+{
+    name:'Change Password',
+    code:1,
+},
+
 ]

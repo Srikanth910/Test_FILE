@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import PersonIcon from "@material-ui/icons/Person";
 import { UserItems,AdminItems,RoleItems } from "../pages/data";
 import { useHistory } from "react-router-dom";
-
+import { MenuItems } from '../pages/FormElements'
 
 const useStyles = makeStyles(() => ({
   list: {
@@ -65,7 +65,7 @@ export default function Sidebar() {
   const adminmenu = (
     <div className={classes.list}>
 <List component="nav" aria-label="main mailbox folders">
-    <ListItem button className={classes.listitem}>
+<ListItem button className={classes.listitem}>
       <ListItemText
         primary={
           <Typography className={classes.typo}>
@@ -74,19 +74,25 @@ export default function Sidebar() {
         }
       />
     </ListItem>
-
-    <ListItem button className={classes.listitem}>
+  {MenuItems.map(item=>{
+     return (
+<ListItem button className={classes.listitem}>
       <ListItemIcon>
         <DraftsIcon />
       </ListItemIcon>
       <ListItemText
         primary={
-          <Typography className={classes.text}>Action Center</Typography>
+          <Typography className={classes.text}>{item.name}</Typography>
         }
       />
     </ListItem>
 
-    <ListItem button className={classes.listitem}>
+     )
+  })}
+   
+
+    
+    {/* <ListItem button className={classes.listitem}>
       <ListItemIcon>
         <TelegramIcon />
       </ListItemIcon>
@@ -97,9 +103,9 @@ export default function Sidebar() {
           </Typography>
         }
       />
-    </ListItem>
+    </ListItem> */}
 
-    <ListItem button className={classes.listitem}>
+    {/* <ListItem button className={classes.listitem}>
       <ListItemIcon>
         <TelegramIcon />
       </ListItemIcon>
@@ -118,8 +124,8 @@ export default function Sidebar() {
       <ListItemText
         primary={<Typography className={classes.text}>Claims</Typography>}
       />
-    </ListItem>
-    <li className={classes.navitem} onClick={handleClick}>
+    </ListItem> */}
+    {/* <li className={classes.navitem} onClick={handleClick}>
           <ListItem button className={classes.listitem}>
             <ListItemIcon>
               <MoneyIcon />
@@ -182,7 +188,7 @@ export default function Sidebar() {
           <Typography className={classes.text}>Change Password</Typography>
         }
       />
-    </ListItem>
+    </ListItem> */}
   </List>
 </div>
   );
