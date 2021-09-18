@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import PersonIcon from "@material-ui/icons/Person";
 import { UserItems,AdminItems,RoleItems } from "../pages/data";
 import { useHistory } from "react-router-dom";
-import { MenuItems } from '../pages/FormElements'
+import { MenuItems, UserMenuItems } from '../pages/FormElements'
 
 const useStyles = makeStyles(() => ({
   list: {
@@ -76,6 +76,40 @@ export default function Sidebar() {
     </ListItem>
   {MenuItems.map(item=>{
      return (
+       <>
+       {item.userdropdown?  <li className={classes.navitem} onClick={handleClick1}>
+      {/* <ListItem button className={classes.listitem}>
+        <ListItemIcon>
+          <MoneyIcon />
+        </ListItemIcon>
+        <ListItemText
+          primary={
+            <Typography className={classes.text}>
+              Prior Authorization Pharmacy
+            </Typography>
+          }
+        />
+        <ArrowDropDownIcon />
+      </ListItem> */}
+      {admindropdown && RoleItems.map((item, index) => {
+      return (
+        <div className={classes.root}>
+          <ListItem button className={classes.text} key={index}>
+            <ListItemIcon style={{ color: "#fff" }}>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText 
+              primary={
+                <Typography className={classes.text}>
+                  {item.title}
+                </Typography>
+              }
+            />
+          </ListItem>
+        </div>
+      );
+    })}
+    </li>:
 <ListItem button className={classes.listitem}>
       <ListItemIcon>
         <DraftsIcon />
@@ -85,8 +119,8 @@ export default function Sidebar() {
           <Typography className={classes.text}>{item.name}</Typography>
         }
       />
-    </ListItem>
-
+    </ListItem>}
+</>
      )
   })}
    
@@ -203,90 +237,35 @@ export default function Sidebar() {
  {username === 'user' ? 
     <div className={classes.list}>
     <List component="nav" aria-label="main mailbox folders">
-        <ListItem button className={classes.listitem}>
+      {UserMenuItems.map(item=>{
+         return (
+           <>
+           {!item.userdropdown?
+          <ListItem button className={classes.listitem}>
           <ListItemText
             primary={
               <Typography className={classes.typo}>
-                Clinical policies and Guidlines
+               {item.name}
               </Typography>
             }
           />
-        </ListItem>
-
-        <ListItem button className={classes.listitem}>
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={classes.text}>Action Center</Typography>
-            }
-          />
-        </ListItem>
-
-        <ListItem button className={classes.listitem}>
-          <ListItemIcon>
-            <TelegramIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={classes.text}>
-                Case management Correspondence
-              </Typography>
-            }
-          />
-        </ListItem>
-
-        <ListItem button className={classes.listitem}>
-          <ListItemIcon>
-            <TelegramIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={classes.text}>
-                Case management Roster
-              </Typography>
-            }
-          />
-        </ListItem>
-
-        <ListItem button className={classes.listitem}>
-          <ListItemIcon>
-            <TelegramIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={classes.text}>
-                Eligibility Search
-              </Typography>
-            }
-          />
-        </ListItem>
-
-        <ListItem button className={classes.listitem}>
-          <ListItemIcon>
-            <MoneyIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={<Typography className={classes.text}>Claims</Typography>}
-          />
-        </ListItem>
-
+        </ListItem>:
+        <>
         <div className={classes.test}>
         <li className={classes.navitem} onClick={handleClick}>
-          <ListItem button className={classes.listitem}>
+          {/* <ListItem button className={classes.listitem}>
             <ListItemIcon>
               <MoneyIcon />
             </ListItemIcon>
             <ListItemText
               primary={
                 <Typography className={classes.text}>
-                  Medical/Behavioral Health
+                   {item.name}
                 </Typography>
               }
             />
             <ArrowDropDownIcon />
-          </ListItem>
+          </ListItem> */}
           {userdropdown && UserItems.map((item, index) => {
           return (
             <div className={classes.root}>
@@ -309,68 +288,48 @@ export default function Sidebar() {
         })}
       </li>
       </div>
-
-        <li className={classes.navitem} onClick={handleClick1}>
-          <ListItem button className={classes.listitem}>
-            <ListItemIcon>
-              <MoneyIcon />
+      
+      <li className={classes.navitem} onClick={handleClick1}>
+      <ListItem button className={classes.listitem}>
+        <ListItemIcon>
+          <MoneyIcon />
+        </ListItemIcon>
+        <ListItemText
+          primary={
+            <Typography className={classes.text}>
+              {item.name}
+            </Typography>
+          }
+        />
+        <ArrowDropDownIcon />
+      </ListItem>
+      {admindropdown && RoleItems.map((item, index) => {
+      return (
+        <div className={classes.root}>
+          <ListItem button className={classes.text} key={index}>
+            <ListItemIcon style={{ color: "#fff" }}>
+              {item.icon}
             </ListItemIcon>
-            <ListItemText
+            <ListItemText 
               primary={
                 <Typography className={classes.text}>
-                  Prior Authorization Pharmacy
+                  {item.title}
                 </Typography>
               }
             />
-            <ArrowDropDownIcon />
           </ListItem>
-          {admindropdown && RoleItems.map((item, index) => {
-          return (
-            <div className={classes.root}>
-              <ListItem button className={classes.text} key={index}>
-                <ListItemIcon style={{ color: "#fff" }}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText 
-                  primary={
-                    <Typography className={classes.text}>
-                      {item.title}
-                    </Typography>
-                  }
-                />
-              </ListItem>
-            </div>
-          );
-        })}
-        </li>
-        <ListItem button className={classes.listitem}>
-          <ListItemIcon>
-            <MoneyIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={<Typography className={classes.text}>Appeals</Typography>}
-          />
-        </ListItem>
-        <ListItem button className={classes.listitem}>
-          <ListItemIcon>
-            <MoneyIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={classes.text}>Correspondence</Typography>
-            }
-          />
-        </ListItem>
-        <ListItem button className={classes.listitem}>
-      <ListItemIcon>
-      <PersonIcon />
-      </ListItemIcon>
-      <ListItemText
-        primary={
-          <Typography className={classes.text}>Change Password</Typography>
-        }
-      />
-    </ListItem>
+        </div>
+      );
+    })}
+    </li></>}
+      </>
+         )
+      })}
+       
+
+        
+      
+
       </List>
     </div> : adminmenu} 
     </>

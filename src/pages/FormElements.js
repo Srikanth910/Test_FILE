@@ -146,7 +146,57 @@ export const MenuItems=[
 {
     name:'Medical/Behavioral Health',
     code:1,
+    userdropdown:true
 },
+
+{
+    name:'Appeals',
+    code:1,
+},
+{
+    name:'Correspondenceh',
+    code:1,
+},
+{
+    name:'Change Password',
+    code:1,
+},
+
+]
+
+export const UserMenuItems=[
+    {
+    name:'Action Center',
+    code:1,
+},
+{
+    name:' Case management Correspondence',
+    code:1,
+},
+
+{
+    name:' Case management Roster',
+    code:1,
+},
+{
+    name:' Case management Roster',
+    code:1,
+},
+{
+    name:'Eligibility Search',
+    code:1,
+},
+{
+    name:'Medical/Behavioral Health',
+    code:1,
+    userdropdown:true
+},
+{
+    name:'   Prior Authorization Pharmacy',
+    code:1,
+    userdropdown:true
+},
+
 
 {
     name:'Appeals',
