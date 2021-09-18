@@ -168,47 +168,57 @@ export const UserMenuItems=[
     {
     name:'Action Center',
     code:1,
+   
 },
 {
     name:' Case management Correspondence',
     code:1,
+   
 },
 
 {
     name:' Case management Roster',
     code:1,
+   
 },
 {
     name:' Case management Roster',
     code:1,
-},
+   },
 {
     name:'Eligibility Search',
     code:1,
+   
 },
 {
     name:'Medical/Behavioral Health',
     code:1,
-    userdropdown:true
+    userdropdown:true,
+    value:"admindropdown"
 },
 {
     name:'   Prior Authorization Pharmacy',
     code:1,
-    userdropdown:true
+    admindropdown:true,
+    value:"userdropdown"
 },
 
 
 {
     name:'Appeals',
     code:1,
+   
 },
 {
     name:'Correspondenceh',
     code:1,
+   
 },
 {
     name:'Change Password',
     code:1,
+   
+    
 },
 
 ]

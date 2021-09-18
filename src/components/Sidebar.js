@@ -10,9 +10,9 @@ import MoneyIcon from "@material-ui/icons/Money";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Typography from "@material-ui/core/Typography";
 import PersonIcon from "@material-ui/icons/Person";
-import { UserItems,AdminItems,RoleItems } from "../pages/data";
+import { UserItems, AdminItems, RoleItems } from "../pages/data";
 import { useHistory } from "react-router-dom";
-import { MenuItems, UserMenuItems } from '../pages/FormElements'
+import { MenuItems, UserMenuItems } from "../pages/FormElements";
 
 const useStyles = makeStyles(() => ({
   list: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     maxWidth: "264px",
     backgroundColor: "#c7c0c0",
     color: "#f3e7e7eb",
-    paddingBottom:'74px'
+    paddingBottom: "74px",
   },
   listitem: {
     borderBottom: "2px solid #696161",
@@ -28,21 +28,20 @@ const useStyles = makeStyles(() => ({
   text: {
     fontSize: "13px",
     color: "#e2e4ea",
-    fontFamily:'Roboto'
+    fontFamily: "Roboto",
   },
   typo: {
     color: "#0c1d7b",
-    fontFamily:'Roboto',
-    fontSize: "14px"
+    fontFamily: "Roboto",
+    fontSize: "14px",
   },
-    root: {
-      margin:'5px',
-      '&:hover': {
+  root: {
+    margin: "5px",
+    "&:hover": {
       backgroundColor: "#675f5f",
-      borderRadius:'5px'
-    }
+      borderRadius: "5px",
+    },
   },
-
 }));
 
 export default function Sidebar() {
@@ -53,32 +52,33 @@ export default function Sidebar() {
   const username = localStorage.getItem("username");
 
   const handleClick = () => {
+    debugger;
     setuserDropdown((userdropdown) => !userdropdown);
   };
 
   const handleClick1 = () => {
+    debugger;
     setadminDropdown((admindropdown) => !admindropdown);
   };
 
-  
-
   const adminmenu = (
     <div className={classes.list}>
-<List component="nav" aria-label="main mailbox folders">
-<ListItem button className={classes.listitem}>
-      <ListItemText
-        primary={
-          <Typography className={classes.typo}>
-            Clinical policies and Guidlines
-          </Typography>
-        }
-      />
-    </ListItem>
-  {MenuItems.map(item=>{
-     return (
-       <>
-       {item.userdropdown?  <li className={classes.navitem} onClick={handleClick1}>
-      {/* <ListItem button className={classes.listitem}>
+      <List component="nav" aria-label="main mailbox folders">
+        <ListItem button className={classes.listitem}>
+          <ListItemText
+            primary={
+              <Typography className={classes.typo}>
+                Clinical policies and Guidlines
+              </Typography>
+            }
+          />
+        </ListItem>
+        {MenuItems.map((item) => {
+          return (
+            <>
+              {item.userdropdown ? (
+                <li className={classes.navitem} onClick={handleClick1}>
+                  {/* <ListItem button className={classes.listitem}>
         <ListItemIcon>
           <MoneyIcon />
         </ListItemIcon>
@@ -91,42 +91,45 @@ export default function Sidebar() {
         />
         <ArrowDropDownIcon />
       </ListItem> */}
-      {admindropdown && RoleItems.map((item, index) => {
-      return (
-        <div className={classes.root}>
-          <ListItem button className={classes.text} key={index}>
-            <ListItemIcon style={{ color: "#fff" }}>
-              {item.icon}
-            </ListItemIcon>
-            <ListItemText 
-              primary={
-                <Typography className={classes.text}>
-                  {item.title}
-                </Typography>
-              }
-            />
-          </ListItem>
-        </div>
-      );
-    })}
-    </li>:
-<ListItem button className={classes.listitem}>
-      <ListItemIcon>
-        <DraftsIcon />
-      </ListItemIcon>
-      <ListItemText
-        primary={
-          <Typography className={classes.text}>{item.name}</Typography>
-        }
-      />
-    </ListItem>}
-</>
-     )
-  })}
-   
+                  {admindropdown &&
+                    RoleItems.map((item, index) => {
+                      return (
+                        <div className={classes.root}>
+                          <ListItem button className={classes.text} key={index}>
+                            <ListItemIcon style={{ color: "#fff" }}>
+                              {item.icon}
+                            </ListItemIcon>
+                            <ListItemText
+                              primary={
+                                <Typography className={classes.text}>
+                                  {item.title}
+                                </Typography>
+                              }
+                            />
+                          </ListItem>
+                        </div>
+                      );
+                    })}
+                </li>
+              ) : (
+                <ListItem button className={classes.listitem}>
+                  <ListItemIcon>
+                    <DraftsIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography className={classes.text}>
+                        {item.name}
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+              )}
+            </>
+          );
+        })}
 
-    
-    {/* <ListItem button className={classes.listitem}>
+        {/* <ListItem button className={classes.listitem}>
       <ListItemIcon>
         <TelegramIcon />
       </ListItemIcon>
@@ -139,7 +142,7 @@ export default function Sidebar() {
       />
     </ListItem> */}
 
-    {/* <ListItem button className={classes.listitem}>
+        {/* <ListItem button className={classes.listitem}>
       <ListItemIcon>
         <TelegramIcon />
       </ListItemIcon>
@@ -159,7 +162,7 @@ export default function Sidebar() {
         primary={<Typography className={classes.text}>Claims</Typography>}
       />
     </ListItem> */}
-    {/* <li className={classes.navitem} onClick={handleClick}>
+        {/* <li className={classes.navitem} onClick={handleClick}>
           <ListItem button className={classes.listitem}>
             <ListItemIcon>
               <MoneyIcon />
@@ -223,116 +226,132 @@ export default function Sidebar() {
         }
       />
     </ListItem> */}
-  </List>
-</div>
+      </List>
+    </div>
   );
 
-  const handleuser = (e) =>{
+  const handleuser = (e) => {
     e.preventDefault();
     history.push("/medical-pa");
-    }
+  };
 
   return (
-    
-   <>
- {username === 'user' ? 
-    <div className={classes.list}>
-    <List component="nav" aria-label="main mailbox folders">
-      {UserMenuItems.map(item=>{
-         return (
-           <>
-           {!item.userdropdown?
-          <ListItem button className={classes.listitem}>
-          <ListItemText
-            primary={
-              <Typography className={classes.typo}>
-               {item.name}
-              </Typography>
+    <>
+      {username === "user" ? (
+        <div className={classes.list}>
+          <List component="nav" aria-label="main mailbox folders">
+            {UserMenuItems.map((item) => {
+              return (
+                <>
+                  {!item.userdropdown&&!item.admindropdown ? (
+                    <ListItem button className={classes.listitem}>
+                      <ListItemText
+                        primary={
+                          <Typography className={classes.typo}>
+                            {item.name}
+                          </Typography>
+                        }
+                      />
+                    </ListItem>
+                  ) : (
+                    <>
+                    {item.userdropdown&&(
+                      <li className={classes.navitem} onClick={handleClick}>
+                        <ListItem button className={classes.listitem}>
+                          <ListItemIcon>
+                            <MoneyIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={
+                              <Typography className={classes.text}>
+                                {item.name}
+                              </Typography>
+                            }
+                          />
+                          <ArrowDropDownIcon />
+                        </ListItem>
+                        {userdropdown &&
+                          UserItems.map((item, index) => {
+                            return (
+                              <div className={classes.root}>
+                                <div className={classes.root1}>
+                                  <ListItem
+                                    button
+                                    className={classes.text}
+                                    key={index}
+                                  >
+                                    <ListItemIcon style={{ color: "#fff" }}>
+                                      {item.icon}
+                                    </ListItemIcon>
+                                    <ListItemText
+                                      className={classes.listitemtext}
+                                      primary={
+                                        <Typography
+                                          className={classes.text}
+                                          onClick={handleuser}
+                                        >
+                                          {item.title}
+                                        </Typography>
+                                      }
+                                    />
+                                  </ListItem>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </li>
+                      )}
+                  
+                  {item.admindropdown&&
+                      <li className={classes.navitem} onClick={handleClick1}>
+                        <ListItem button className={classes.listitem}>
+                          <ListItemIcon>
+                            <MoneyIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={
+                              <Typography className={classes.text}>
+                                {item.name}
+                              </Typography>
+                            }
+                          />
+                          <ArrowDropDownIcon />
+                        </ListItem>
+                        {admindropdown &&
+                          RoleItems.map((item, index) => {
+                            return (
+                              <div className={classes.root}>
+                                <ListItem
+                                  button
+                                  className={classes.text}
+                                  key={index}
+                                >
+                                  <ListItemIcon style={{ color: "#fff" }}>
+                                    {item.icon}
+                                  </ListItemIcon>
+                                  <ListItemText
+                                    primary={
+                                      <Typography className={classes.text}>
+                                        {item.title}
+                                      </Typography>
+                                    }
+                                  />
+                                </ListItem>
+                              </div>
+                            );
+                          })}
+                      </li>
             }
-          />
-        </ListItem>:
-        <>
-        <div className={classes.test}>
-        <li className={classes.navitem} onClick={handleClick}>
-          {/* <ListItem button className={classes.listitem}>
-            <ListItemIcon>
-              <MoneyIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography className={classes.text}>
-                   {item.name}
-                </Typography>
-              }
-            />
-            <ArrowDropDownIcon />
-          </ListItem> */}
-          {userdropdown && UserItems.map((item, index) => {
-          return (
-            <div className={classes.root}>
-              <div  className={classes.root1}>
-              <ListItem button className={classes.text} key={index}>
-                <ListItemIcon style={{ color: "#fff" }}>
-                 {item.icon}
-                </ListItemIcon>
-                <ListItemText className={classes.listitemtext}
-                  primary={
-                    <Typography className={classes.text} onClick={handleuser}>
-                     {item.title}
-                    </Typography>
-                  }
-                />
-              </ListItem>
-              </div>
-            </div>
-          );
-        })}
-      </li>
-      </div>
-      
-      <li className={classes.navitem} onClick={handleClick1}>
-      <ListItem button className={classes.listitem}>
-        <ListItemIcon>
-          <MoneyIcon />
-        </ListItemIcon>
-        <ListItemText
-          primary={
-            <Typography className={classes.text}>
-              {item.name}
-            </Typography>
-          }
-        />
-        <ArrowDropDownIcon />
-      </ListItem>
-      {admindropdown && RoleItems.map((item, index) => {
-      return (
-        <div className={classes.root}>
-          <ListItem button className={classes.text} key={index}>
-            <ListItemIcon style={{ color: "#fff" }}>
-              {item.icon}
-            </ListItemIcon>
-            <ListItemText 
-              primary={
-                <Typography className={classes.text}>
-                  {item.title}
-                </Typography>
-              }
-            />
-          </ListItem>
+                    </>
+                  )}
+                </>
+              );
+            })}
+          </List>
         </div>
-      );
-    })}
-    </li></>}
-      </>
-         )
-      })}
-       
-
-        
-      
-
-      </List>
-    </div> : adminmenu} 
+      ) : (
+        adminmenu
+      )}
     </>
   );
 }
