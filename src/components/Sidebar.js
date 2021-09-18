@@ -233,6 +233,7 @@ export default function Sidebar() {
     }
 
   return (
+    
    <>
  {username === 'user' ? 
     <div className={classes.list}>
