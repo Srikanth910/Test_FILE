@@ -93,3 +93,26 @@ export const UserItems = [
       // "1234","1-25 Guntur","Eligible","18-09-2021","19-09-2021","MHK","UNIFY",4,
       // "ADULT BENEFIT","11111111111111","2222222","1203278","Thomas","GPADT01","GPAD02 Group Name"),
     ];
+
+    export const ServiceheadCells = [
+      { id: '1', numeric: false, disablePadding: true, label: 'ACTION' },
+      { id: '2', numeric: true, disablePadding: false, label: 'PROVIDER NAME' },
+      { id: '3', numeric: true, disablePadding: false, label: 'NPI' },
+      { id: '4', numeric: true, disablePadding: false, label: 'DEA ' },
+      { id: '5', numeric: true, disablePadding: false, label: 'SPECALITY' },
+      { id: '6', numeric: true, disablePadding: false, label: 'ADDRESS'},
+      { id: '7', numeric: true, disablePadding: false, label: 'NETWORK ' },
+      { id: '8', numeric: true, disablePadding: false, label: 'ADDRESS1' },
+      { id: '9', numeric: true, disablePadding: false, label: 'FAX NUMBER' },
+      { id: '10', numeric: true, disablePadding: false, label: 'PROVIDER TYPE ' },
+      { id: '11', numeric: true, disablePadding: false, label: 'PROVIDER STATUS' },
+
+    
+    ]
+    export function createDatamain(ACTION, PROVIDER_NAME, NPI, DEA,SPECALITY,ADDRESS1,NETWORK,
+      ADDRESS,FAX_NUMBER,PROVIDER_TYPE,PROVIDER_STATUS,) {
+
+      return {ACTION, PROVIDER_NAME, NPI, DEA, SPECALITY,ADDRESS1,NETWORK,
+        ADDRESS,FAX_NUMBER,PROVIDER_TYPE,PROVIDER_STATUS, };
+    }
+    

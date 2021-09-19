@@ -389,7 +389,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { headCells, rows } from "../pages/data";
+// import { headCells, rows } from "../pages/data";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -437,7 +437,7 @@ function EnhancedTableHead(props) {
     <TableHead className={classes.thead}>
       <TableRow>
         <TableCell padding="checkbox"></TableCell>
-        {headCells.map((headCell) => (
+        {headCell?.map((headCell) => (
           <TableCell
             key={headCell.id}
             className={classes.tablestyle}
@@ -533,7 +533,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Datatable({rows, headCell}) {
+export default function Datatable({rows, headCells}) {
   const classes = useStyles();
   const history = useHistory();
   const [order, setOrder] = React.useState("asc");
@@ -598,7 +598,7 @@ export default function Datatable({rows, headCell}) {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, rows?.length - page * rowsPerPage);
 
   return (
     <div>
@@ -618,9 +618,9 @@ export default function Datatable({rows, headCell}) {
                 orderBy={orderBy}
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
-                rowCount={rows.length}
+                rowCount={rows?.length}
                                 rows={rows}
-                                headCell={headCell}
+                                headCell={headCells}
               />
               <TableBody>
                 {stableSort(rows, getComparator(order, orderBy))
