@@ -116,3 +116,15 @@ export const UserItems = [
         ADDRESS,FAX_NUMBER,PROVIDER_TYPE,PROVIDER_STATUS, };
     }
     
+
+    
+    export const icdheadCells = [
+      { id: '1', numeric: false, disablePadding: true, label: 'ACTION' },
+      { id: '2', numeric: true, disablePadding: false, label: 'ICD NUMBER' },
+      { id: '3', numeric: true, disablePadding: false, label: 'DESCRIPTION' },
+      { id: '4', numeric: true, disablePadding: false, label: 'ICD TYPE ' },
+      
+    ]
+
+
+    

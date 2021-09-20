@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import ModalForm from "./Modal";
 import { inputFormElements } from "../pages/FormElements";
 import Formmodal from "./FormModal";
+import Icdmodal from "./IcdModal";
 
 const useStyles = makeStyles((theme) => ({
   palette: {
@@ -170,6 +171,7 @@ export default function MedicalForm() {
       </Grid>
       <ModalForm open={open} handleClose={handleClose} formdata={formdata} />
       {/* <Formmodal/> */}
+      <Icdmodal/>
     </div>
   );
 }

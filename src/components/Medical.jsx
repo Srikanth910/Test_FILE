@@ -146,6 +146,16 @@ export default function Medical(props) {
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
+
+   const duplicate=(data)=>{
+      let temp=[...mainlist]
+       temp.map(item=>{
+          if(item.Npi===data.last_name){
+             return data
+          }
+       })
+
+   }
  const handleSubmit=()=>{
     
    setmainlist(mainlist=>[...mainlist, createData(modalformdata.Firtname, modalformdata.Npi ,  modalformdata.Dea, modalformdata.Speciality,modalformdata.street,   modalformdata.LastName, modalformdata.City,modalformdata.Fastfaxid, modalformdata.type, "Pending")])
