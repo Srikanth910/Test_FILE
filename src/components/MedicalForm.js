@@ -171,7 +171,7 @@ export default function MedicalForm() {
       </Grid>
       <ModalForm open={open} handleClose={handleClose} formdata={formdata} />
       {/* <Formmodal/> */}
-      <Icdmodal/>
+    
     </div>
   );
 }

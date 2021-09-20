@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import {
   Typography,
@@ -27,8 +27,9 @@ import { withStyles } from "@material-ui/styles";
 import InputBase from "@material-ui/core/InputBase";
 import Appbar from "./Appbar";
 import Datatable from "./DataTable";
-import { ServiceheadCells, createDatamain, createData } from "../pages/data";
+import { ServiceheadCells, createDatamain, createData ,icdheadCells} from "../pages/data";
 import Formmodal from "./FormModal";
+import Icdmodal from "./IcdModal";
 const BootstrapInput = withStyles((theme) => ({
   root: {
     "label + &": {
@@ -133,8 +134,10 @@ export default function Medical(props) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState("a");
    const [serviceProvider, setserviceProvider]=React.useState(false)
+   const [IcdmodalOpen, setIcdmodal]=React.useState(false)
    const [modalformdata,setmodalformdata]=React.useState({})
    const [mainlist, setmainlist]=React.useState([])
+    const [selectIcddetails, setselectIcddetails]=useState('')
   const Data = props.location?.state?.rowData;
 
   const handleClickOpen = () => {
@@ -142,6 +145,8 @@ export default function Medical(props) {
   };
   const handleClose = () => {
     setOpen(false);
+    setIcdmodal(false)
+    // setmodalformdata(false)
   };
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -162,8 +167,13 @@ export default function Medical(props) {
    setserviceProvider(false)
 
  }
-  console.log(mainlist)
+  console.log(selectIcddetails, ";ll")
 
+const handlerowdata=()=>{
+  
+}
+
+ console.log(selectIcddetails, "frerfe")
   return (
     <>
       {/* <Navbar /> */}
@@ -574,6 +584,7 @@ export default function Medical(props) {
                           color="primary"
                           disableElevation
                           spacing={2}
+                           onClick={()=>setIcdmodal(true)}
                         >
                           Add Servicing provider
                         </Button>
@@ -586,7 +597,9 @@ export default function Medical(props) {
                   </Toolbar>
 
                   <Toolbar className={classes.toolbarItem2}>
-                    <div className={classes.gridContainer}></div>
+                    <div className={classes.gridContainer}>
+                    <Datatable headCells={icdheadCells} rows={selectIcddetails||[{}]}/>
+                    </div>
                   </Toolbar>
                 </form>
               </Toolbar>
@@ -614,6 +627,7 @@ export default function Medical(props) {
       modalformdata={modalformdata}
       handleSubmit={handleSubmit}
       />
+        <Icdmodal open ={IcdmodalOpen} handleClose={handleClose} setselectIcddetails={setselectIcddetails} setIcdmodal={setIcdmodal}/>
     </>
   );
 }

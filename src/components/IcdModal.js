@@ -237,27 +237,31 @@ export default function Icdmodal({
   formdata,
   setmodalformdata,
   modalformdata,
+  setselectIcddetails,
   handleSubmit,
+  setIcdmodal
 }) {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [text, settext] = useState("")
+  const [text, settext] = useState("");
 
-  const [tablerows, setrows] = React.useState([ createData(
-    "2323",
-    "a systematic statement of a body of law especially : one given statutory force. 2 : a"
-  ),
+  const [tablerows, setrows] = React.useState([
+    createData(
+      "2323",
+      "a systematic statement of a body of law especially : one given statutory force. 2 : a"
+    ),
 
-  createData(
-    "2345",
-    "a systematic statement of a body of law especially : one given statutory force. 2 : a"
-  ),
-  createData(
-    "2365",
-    "a systematic statement of a body of law especially : one given statutory force. 2 : a"
-  ),]);
-   
+    createData(
+      "2345",
+      "a systematic statement of a body of law especially : one given statutory force. 2 : a"
+    ),
+    createData(
+      "2365",
+      "a systematic statement of a body of law especially : one given statutory force. 2 : a"
+    ),
+  ]);
+
   //    const [modalformdata,setmodalformdata]=React.useState({})
 
   const handlechange = (e, data) => {
@@ -283,23 +287,24 @@ export default function Icdmodal({
     return temp;
   };
 
-   const handlesearchchange=(event)=>{
+  const handlesearchchange = (event) => {
     if (event.target.value) {
-        // console.log(onSearch(tablerows, event.target.value));
-        settext(event.target.value)
-      }
-
-   }
-    const handlesearch=()=>{
-        
-            // console.log(onSearch(tablerows, event.target.value));
-            setrows(onSearch(tablerows, text));
-          
-         
+      // console.log(onSearch(tablerows, event.target.value));
+      settext(event.target.value);
     }
+  };
+  const handlesearch = () => {
+    // console.log(onSearch(tablerows, event.target.value));
+    setrows(onSearch(tablerows, text));
+  };
+   const handlerowdata=(row)=>{
+    setIcdmodal(false)
+     
+     setselectIcddetails([row])
+   }
   return (
     <div>
-      <Dialog open={true} onClose={handleClose} maxWidth="lg">
+      <Dialog open={open} onClose={handleClose} maxWidth="lg">
         <DialogTitle>
           <div style={{ display: "flex" }}>
             <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
@@ -324,9 +329,11 @@ export default function Icdmodal({
                   </Grid>
 
                   <Grid item>
-                    <TextField variant="outlined" size="small" fullWidth
-                    
-                     onChange={handlesearchchange}
+                    <TextField
+                      variant="outlined"
+                      size="small"
+                      fullWidth
+                      onChange={handlesearchchange}
                     />
                   </Grid>
                 </Grid>
@@ -369,10 +376,11 @@ export default function Icdmodal({
 
             <Toolbar className={classes.toolbarItem2}>
               {/* <div className={classes.gridContainer}> */}
-                <Datatable
-                  rows={tablerows}
-                  headCells={icdheadCells}
-                />
+              <Datatable rows={tablerows} headCells={icdheadCells}
+              handlerowdata={handlerowdata}
+
+              IcdModal={true}
+              />
               {/* </div> */}
             </Toolbar>
           </div>

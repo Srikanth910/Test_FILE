@@ -209,6 +209,9 @@ export default function ModalForm({ handleClose, open , formdata}) {
       setrows(data);
     }
   }, [formdata]);
+   const handlerowdata=()=>{
+     
+   }
   return (
     <div>
       <Dialog open={open} onClose={handleClose} maxWidth="lg">
@@ -253,6 +256,7 @@ export default function ModalForm({ handleClose, open , formdata}) {
 
             <DataTable
             headCells={headCells} rows={tablerows}
+            handlerowdata={handlerowdata}
             />
           </div>
         </DialogContent>

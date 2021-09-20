@@ -533,7 +533,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Datatable({rows, headCells}) {
+export default function Datatable({rows, headCells, handlerowdata, IcdModal}) {
   const classes = useStyles();
   const history = useHistory();
   const [order, setOrder] = React.useState("asc");
@@ -548,9 +548,16 @@ export default function Datatable({rows, headCells}) {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-  const handleSelect = (e) => {
+  const handleSelect = (e, row) => {
+   
+    if(IcdModal){
+ handlerowdata(row)
+    }else{
+
+    
     e.preventDefault();
     history.push("/medical-pa");
+    }
   };
 
   const handleSelectAllClick = (event) => {
@@ -655,7 +662,7 @@ export default function Datatable({rows, headCells}) {
                             color="primary"
                             variant="contained"
                             style={{ textTransform: "none",  backgroundColor:'#0b1963' }}
-                            onClick={handleSelect}
+                            onClick={(e,)=>handleSelect(e, row)}
                           >
                             Select
                           </Button>
