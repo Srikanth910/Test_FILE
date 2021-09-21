@@ -15,6 +15,7 @@ import {
   MenuItem,
   RadioGroup,
   FormControlLabel,
+  Box
 } from "@material-ui/core";
 import ModalForm from "./Modal";
 // import Test from "./Test";
@@ -27,7 +28,12 @@ import { withStyles } from "@material-ui/styles";
 import InputBase from "@material-ui/core/InputBase";
 import Appbar from "./Appbar";
 import Datatable from "./DataTable";
-import { ServiceheadCells, createDatamain, createData ,icdheadCells} from "../pages/data";
+import {
+  ServiceheadCells,
+  createDatamain,
+  createData,
+  icdheadCells,
+} from "../pages/data";
 import Formmodal from "./FormModal";
 import Icdmodal from "./IcdModal";
 const BootstrapInput = withStyles((theme) => ({
@@ -133,11 +139,12 @@ export default function Medical(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState("a");
-   const [serviceProvider, setserviceProvider]=React.useState(false)
-   const [IcdmodalOpen, setIcdmodal]=React.useState(false)
-   const [modalformdata,setmodalformdata]=React.useState({})
-   const [mainlist, setmainlist]=React.useState([])
-    const [selectIcddetails, setselectIcddetails]=useState('')
+  const [serviceProvider, setserviceProvider] = React.useState(false);
+  const [IcdmodalOpen, setIcdmodal] = React.useState(false);
+  const [modalformdata, setmodalformdata] = React.useState({});
+  const [mainlist, setmainlist] = React.useState([]);
+  const [selectIcddetails, setselectIcddetails] = useState("");
+   const [loop, setloop]=useState([])
   const Data = props.location?.state?.rowData;
 
   const handleClickOpen = () => {
@@ -145,35 +152,54 @@ export default function Medical(props) {
   };
   const handleClose = () => {
     setOpen(false);
-    setIcdmodal(false)
+    setIcdmodal(false);
     // setmodalformdata(false)
   };
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
-   const duplicate=(data)=>{
-      let temp=[...mainlist]
-       temp.map(item=>{
-          if(item.Npi===data.last_name){
-             return data
-          }
-       })
+  const duplicate = (data) => {
+    let temp = [...mainlist];
+    temp.map((item) => {
+      if (item.Npi === data.last_name) {
+        return data;
+      }
+    });
+  };
+  const handleSubmit = () => {
+    setmainlist((mainlist) => [
+      ...mainlist,
+      createData(
+        modalformdata.Firtname,
+        modalformdata.Npi,
+        modalformdata.Dea,
+        modalformdata.Speciality,
+        modalformdata.street,
+        modalformdata.LastName,
+        modalformdata.City,
+        modalformdata.Fastfaxid,
+        modalformdata.type,
+        "Pending"
+      ),
+    ]);
+    setserviceProvider(false);
+  };
+  console.log(selectIcddetails, ";ll");
 
-   }
- const handleSubmit=()=>{
-    
-   setmainlist(mainlist=>[...mainlist, createData(modalformdata.Firtname, modalformdata.Npi ,  modalformdata.Dea, modalformdata.Speciality,modalformdata.street,   modalformdata.LastName, modalformdata.City,modalformdata.Fastfaxid, modalformdata.type, "Pending")])
-   setserviceProvider(false)
+  const handlerowdata = () => {};
 
- }
-  console.log(selectIcddetails, ";ll")
+  console.log(selectIcddetails, "frerfe");
 
-const handlerowdata=()=>{
-  
-}
+  const handleupdate = (e, value) => {
+   
+     if(value==="Request Type"){
+      setloop([1, 2])
 
- console.log(selectIcddetails, "frerfe")
+     }
+    console.log(e.target.value, value, "refe");
+  };
+
   return (
     <>
       {/* <Navbar /> */}
@@ -517,7 +543,15 @@ const handlerowdata=()=>{
                                       id="demo-customized-select"
                                       input={<BootstrapInput />}
                                       fullWidth
-                                    ></Select>
+                                      onChange={(e) =>
+                                        handleupdate(e, input.textlabel)
+                                      }
+                                    >
+                                      <MenuItem value=""></MenuItem>
+                                      <MenuItem value={1}>1</MenuItem>
+                                      <MenuItem value={2}>2</MenuItem>
+                                      <MenuItem value={3}>3</MenuItem>
+                                    </Select>
                                   </FormControl>
                                 </Grid>
                               </Grid>
@@ -526,8 +560,75 @@ const handlerowdata=()=>{
                         )}
                       </>
                     ))}
+
+                    <Grid container direction="row" xs={12} spacing="5">
+                      {loop.map(item=>{
+                         return(
+                          <Grid item xs={6}>
+                          <Grid container direction="column">
+                                    <Grid item>
+                                      <Typography
+                                        variant="body1"
+                                        style={{ fontWeight: "600" }}
+                                      >
+                                        {"Request"}
+                                      </Typography>
+                                    </Grid>
+    
+                                    <Grid item>
+                                      <FormControl>
+                                        <Select
+                                          labelId="demo-customized-select-label"
+                                          id="demo-customized-select"
+                                          input={<BootstrapInput />}
+                                          fullWidth
+                                           style={{width:'100%'}}
+                                          
+                                        >
+                                          <MenuItem value=""></MenuItem>
+                                          <MenuItem value={1}>1</MenuItem>
+                                          <MenuItem value={2}>2</MenuItem>
+                                          <MenuItem value={3}>3</MenuItem>
+                                        </Select>
+                                      </FormControl>
+                                    </Grid>
+                                  </Grid>
+                          </Grid>
+                         )
+                      })}
+                                    {loop.map(item=>{
+                         return(
+                      <Grid item xs={6}>
+                        <Grid container direction="column">
+                          <Grid item>
+                            <Typography
+                              variant="body1"
+                              style={{ fontWeight: "600" }}
+                              // key={}
+                            >
+                              {"TEXT"}
+                            </Typography>
+                          </Grid>
+
+                          <Grid item>
+                            <TextField
+                              // {...input}
+                              variant="outlined"
+                              size="small"
+                              required
+                              fullWidth
+                              // onChange={(e) => handlechange(e, input)}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                       )
+                      })}
+                    </Grid>
+                    
                   </Grid>
-                  <br />
+                  <Box py={4}></Box>
+
 
                   <Toolbar className={classes.tool}>
                     <Grid container justifyContent="space-between">
@@ -545,7 +646,7 @@ const handlerowdata=()=>{
                             color="primary"
                             disableElevation
                             spacing={2}
-                             onClick={()=>setserviceProvider(true)}
+                            onClick={() => setserviceProvider(true)}
                           >
                             Add Servicing provider
                           </Button>
@@ -560,8 +661,7 @@ const handlerowdata=()=>{
 
                   <Toolbar className={classes.toolbarItem2}>
                     <div className={classes.gridContainer}>
-
-                      <Datatable rows={mainlist} headCells={ServiceheadCells}/>
+                      <Datatable rows={mainlist} headCells={ServiceheadCells} />
                     </div>
 
                     {/* <Test /> */}
@@ -584,7 +684,7 @@ const handlerowdata=()=>{
                           color="primary"
                           disableElevation
                           spacing={2}
-                           onClick={()=>setIcdmodal(true)}
+                          onClick={() => setIcdmodal(true)}
                         >
                           Add Servicing provider
                         </Button>
@@ -598,7 +698,10 @@ const handlerowdata=()=>{
 
                   <Toolbar className={classes.toolbarItem2}>
                     <div className={classes.gridContainer}>
-                    <Datatable headCells={icdheadCells} rows={selectIcddetails||[{}]}/>
+                      <Datatable
+                        headCells={icdheadCells}
+                        rows={selectIcddetails || [{}]}
+                      />
                     </div>
                   </Toolbar>
                 </form>
@@ -620,14 +723,19 @@ const handlerowdata=()=>{
           </Grid>
         </Grid>
       </div>
-      <Formmodal open={serviceProvider} handleClose={handleClose}
-      
-      
-      setmodalformdata={setmodalformdata}
-      modalformdata={modalformdata}
-      handleSubmit={handleSubmit}
+      <Formmodal
+        open={serviceProvider}
+        handleClose={handleClose}
+        setmodalformdata={setmodalformdata}
+        modalformdata={modalformdata}
+        handleSubmit={handleSubmit}
       />
-        <Icdmodal open ={IcdmodalOpen} handleClose={handleClose} setselectIcddetails={setselectIcddetails} setIcdmodal={setIcdmodal}/>
+      <Icdmodal
+        open={IcdmodalOpen}
+        handleClose={handleClose}
+        setselectIcddetails={setselectIcddetails}
+        setIcdmodal={setIcdmodal}
+      />
     </>
   );
 }
